@@ -11,4 +11,15 @@ def get_current_itunes_song():
     except Exception as e:
         return f"Error: {e}"
 
+def next_song():
+    try:
+        itunes = win32com.client.Dispatch("iTunes.Application")
+        itunes.NextTrack()
+        print("Skipped to next song.")
+    except Exception as e:
+        print(f"Error: {e}")
+
+
+print(get_current_itunes_song())
+next_song()
 print(get_current_itunes_song())

@@ -1,34 +1,58 @@
 import win32com.client
+import logging
+
+logging.basicConfig(level=logging.INFO, format='%(message)s')
+
+def get_itunes_instance():
+    """Attempt to get an instance of iTunes."""
+    try:
+        return win32com.client.Dispatch('iTunes.Application')
+    except Exception as e:
+        logging.error(f'Could not connect to iTunes: {e}')
+        return None
 
 def get_current_itunes_song():
+    """Retrieve the currently playing song."""
+    itunes = get_itunes_instance()
+    if not itunes:
+        return 'iTunes is not running.'
+
     try:
-        itunes = win32com.client.Dispatch('iTunes.Application')
         current_track = itunes.CurrentTrack
-        if current_track:
+        if current_track and current_track.Name and current_track.Artist:
             return f'{current_track.Name} - {current_track.Artist}'
         else:
-            return 'No song is currently playing'
+            return 'No song is currently playing.'
     except Exception as e:
-        return f'Error: {e}'
+        return f'Error retrieving track info: {e}'
 
 def next_song():
+    """Skip to the next track."""
+    itunes = get_itunes_instance()
+    if not itunes:
+        return
+
     try:
-        itunes = win32com.client.Dispatch('iTunes.Application')
         itunes.NextTrack()
-        print('Skipped to next song.')
+        logging.info('Skipped to next song.')
     except Exception as e:
-        print(f'Error: {e}')
+        logging.error(f'Error skipping to next song: {e}')
 
 def prev_song():
-    try:
-        itunes = win32com.client.Dispatch('iTunes.Application')
-        itunes.PreviousTrack()
-        print('Skipped to prev song.')
-    except Exception as e:
-        print(f'Error: {e}')
+    """Skip to the previous track."""
+    itunes = get_itunes_instance()
+    if not itunes:
+        return
 
-print(get_current_itunes_song())
-next_song()
-print(get_current_itunes_song())
-prev_song()
-print(get_current_itunes_song())
+    try:
+        itunes.PreviousTrack()
+        logging.info('Playing previous song.')
+    except Exception as e:
+        logging.error(f'Error skipping to previous song: {e}')
+
+if __name__ == '__main__':
+    logging.info(get_current_itunes_song())
+    next_song()
+    logging.info(get_current_itunes_song())
+    prev_song()
+    logging.info(get_current_itunes_song())

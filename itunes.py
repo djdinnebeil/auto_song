@@ -26,6 +26,18 @@ def get_current_itunes_song():
     except Exception as e:
         return f'Error retrieving track info: {e}'
 
+def play_pause_song():
+    """Toggle play/pause for the current song."""
+    itunes = get_itunes_instance()
+    if not itunes:
+        return
+
+    try:
+        itunes.PlayPause()
+        logging.info('Toggled play/pause.')
+    except Exception as e:
+        logging.error(f'Error toggling play/pause: {e}')
+
 def next_song():
     """Skip to the next track."""
     itunes = get_itunes_instance()
@@ -51,8 +63,4 @@ def prev_song():
         logging.error(f'Error skipping to previous song: {e}')
 
 if __name__ == '__main__':
-    logging.info(get_current_itunes_song())
-    next_song()
-    logging.info(get_current_itunes_song())
-    prev_song()
-    logging.info(get_current_itunes_song())
+    play_pause_song()

@@ -19,8 +19,8 @@ def get_current_itunes_song():
 
     try:
         current_track = itunes.CurrentTrack
-        if current_track and current_track.Name and current_track.Artist:
-            return f'{current_track.Name} - {current_track.Artist}'
+        if current_track:
+            return f'[{current_track.Name}] [{current_track.Artist}] [{current_track.Album}] [{current_track.Duration}]'
         else:
             return 'No song is currently playing.'
     except Exception as e:
@@ -63,4 +63,4 @@ def prev_song():
         logging.error(f'Error skipping to previous song: {e}')
 
 if __name__ == '__main__':
-    play_pause_song()
+    print(get_current_itunes_song())

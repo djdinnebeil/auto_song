@@ -2,6 +2,7 @@ import win32com.client
 import logging
 import functools
 import os
+import subprocess
 
 # Create separate loggers
 file_logger = logging.getLogger('FileLogger')
@@ -113,7 +114,18 @@ def open_itunes():
         print("Error opening iTunes:", e)
 
 
+@log_function_call
+def open_itunes_cross_platform():
+    itunes_path = r"C:\DJ\Software\iTunes\iTunes.exe"
+    try:
+        subprocess.Popen(itunes_path)
+        print("iTunes opened successfully.")
+    except FileNotFoundError:
+        print("Error: iTunes executable not found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+
+
 if __name__ == '__main__':
-    play_pause_song()
-    get_current_itunes_song()
-    open_itunes()
+    open_itunes_cross_platform()

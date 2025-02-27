@@ -1,6 +1,7 @@
 import win32com.client
 import logging
 import functools
+import os
 
 # Create separate loggers
 file_logger = logging.getLogger('FileLogger')
@@ -96,7 +97,6 @@ def prev_song():
     itunes = get_itunes_instance()
     if not itunes:
         return
-
     try:
         itunes.PreviousTrack()
         console_logger.info('Playing previous song.')
@@ -105,6 +105,15 @@ def prev_song():
         file_logger.error(f'Error skipping to previous song: {e}', exc_info=True)
         console_logger.error('Failed to go to previous song.')
 
+@log_function_call
+def open_itunes():
+    try:
+        os.startfile(r"C:\DJ\Software\iTunes\iTunes.exe")
+    except Exception as e:
+        print("Error opening iTunes:", e)
+
+
 if __name__ == '__main__':
     play_pause_song()
-    print(get_current_itunes_song())
+    get_current_itunes_song()
+    open_itunes()

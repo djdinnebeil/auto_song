@@ -125,7 +125,10 @@ def open_itunes_cross_platform():
     except Exception as e:
         print(f"An error occurred: {e}")
 
+@log_function_call
+def close_itunes_os_taskkill():
+    os.system("taskkill /IM iTunes.exe /F")
 
 
 if __name__ == '__main__':
-    open_itunes_cross_platform()
+    close_itunes_os_taskkill()

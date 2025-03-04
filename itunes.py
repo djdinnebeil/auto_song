@@ -129,6 +129,17 @@ def open_itunes_cross_platform():
 def close_itunes_os_taskkill():
     os.system("taskkill /IM iTunes.exe /F")
 
+@log_function_call
+def close_itunes_windows():
+    """Close iTunes and log the result."""
+    try:
+        result = subprocess.run(["taskkill", "/IM", "iTunes.exe", "/F"],
+                                capture_output=True, text=True, check=True)
+        file_logger.info(f"iTunes closed successfully: {result.stdout.strip()}")
+        console_logger.info("iTunes closed successfully.")
+    except subprocess.CalledProcessError as e:
+        file_logger.error(f"Failed to close iTunes: {e.stderr.strip()}", exc_info=True)
+        console_logger.warning("iTunes is not running or could not be closed.")
 
 if __name__ == '__main__':
-    close_itunes_os_taskkill()
+    close_itunes_windows()

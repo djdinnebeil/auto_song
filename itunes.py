@@ -3,6 +3,7 @@ import logging
 import functools
 import os
 import subprocess
+import sys
 
 # Create separate loggers
 file_logger = logging.getLogger('FileLogger')
@@ -141,5 +142,26 @@ def close_itunes_windows():
         file_logger.error(f"Failed to close iTunes: {e.stderr.strip()}", exc_info=True)
         console_logger.warning("iTunes is not running or could not be closed.")
 
+@log_function_call
+def close_itunes_cross_platform():
+    """Close iTunes in a cross-platform manner."""
+    try:
+        if sys.platform.startswith("win"):  # Windows
+            result = subprocess.run(["taskkill", "/IM", "iTunes.exe", "/F"],
+                                    capture_output=True, text=True, check=True)
+        elif sys.platform == "darwin":  # macOS
+            result = subprocess.run(["pkill", "-f", "iTunes"],
+                                    capture_output=True, text=True, check=True)
+        elif sys.platform.startswith("linux"):  # Linux (unlikely to have iTunes)
+            file_logger.warning("iTunes is not typically available on Linux.")
+            console_logger.warning("iTunes is not typically available on Linux.")
+            return
+
+        file_logger.info(f"iTunes closed successfully: {result.stdout.strip()}")
+        console_logger.info("iTunes closed successfully.")
+    except subprocess.CalledProcessError as e:
+        file_logger.error(f"Failed to close iTunes: {e.stderr.strip()}", exc_info=True)
+        console_logger.warning("iTunes is not running or could not be closed.")
+
 if __name__ == '__main__':
-    close_itunes_windows()
+    close_itunes_cross_platform()

@@ -1,7 +1,6 @@
 from datetime import datetime
 from zoneinfo import ZoneInfo
-
-end_of_day = 6
+import config
 
 def get_current_time_in_timezone(timezone: str = "UTC"):
     return datetime.now(ZoneInfo(timezone))
@@ -30,7 +29,7 @@ def format_minutes(minutes: int):
     return f'{minutes}'
 
 def format_hour(hour: int):
-    if hour < end_of_day:
+    if hour < config.end_of_day:
         hour += 24
     elif hour < 10:
         return f'0{hour}'

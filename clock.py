@@ -37,10 +37,15 @@ def format_hour(hour: int):
         hour -= 12
     return f'{hour}'
 
+def get_timestamp():
+    timestamp = datetime.now()
+    hour = format_hour(timestamp.hour)
+    minutes = format_hour(timestamp.minute)
+    return f'{hour}:{minutes}'
+
 if __name__ == '__main__':
     print(get_current_time())
     print(get_current_time_in_timezone("America/New_York"))
     print(get_formatted_date())
     print(get_local_time_dict()['hour'])
-    print(format_minutes(datetime.now().minute))
-    print(format_hour(datetime.now().hour))
+    print(get_timestamp())

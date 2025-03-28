@@ -43,9 +43,14 @@ def get_timestamp():
     minutes = format_hour(timestamp.minute)
     return f'{hour}:{minutes}'
 
+def get_minutes_stamp():
+    timestamp = datetime.now()
+    return timestamp.hour * 60 + timestamp.minute
+
 if __name__ == '__main__':
     print(get_current_time())
     print(get_current_time_in_timezone("America/New_York"))
     print(get_formatted_date())
     print(get_local_time_dict()['hour'])
     print(get_timestamp())
+    print(get_minutes_stamp())

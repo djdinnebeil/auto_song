@@ -43,7 +43,8 @@ def get_timestamp():
     minutes = format_hour(timestamp.minute)
     return f'{hour}:{minutes}'
 
-def get_minutes_stamp():
+def get_minutes_stamp() -> int:
+    """Return the number of minutes elapsed since midnight"""
     timestamp = datetime.now()
     return timestamp.hour * 60 + timestamp.minute
 

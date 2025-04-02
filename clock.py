@@ -48,6 +48,12 @@ def get_timestamp():
     minutes = format_hour(timestamp.minute)
     return f'{hour}:{minutes}'
 
+def get_timestamp_with_seconds():
+    timestamp = datetime.now()
+    hour = format_hour(timestamp.hour)
+    minutes = format_hour(timestamp.minute)
+    seconds = format_hour(timestamp.second)
+    return f'{hour}:{minutes}:{seconds}'
 
 def get_minutes_stamp() -> int:
     """Return the number of minutes elapsed since midnight"""
@@ -61,3 +67,4 @@ if __name__ == '__main__':
     print(get_local_time_dict()['hour'])
     print(get_timestamp())
     print(get_minutes_stamp())
+    print(get_timestamp_with_seconds())

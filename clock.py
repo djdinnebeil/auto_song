@@ -37,11 +37,17 @@ def format_hour(hour: int):
         hour -= 12
     return f'{hour}'
 
+def format_seconds(seconds: int):
+    if seconds < 10:
+        return f'0{seconds}'
+    return f'{seconds}'
+
 def get_timestamp():
     timestamp = datetime.now()
     hour = format_hour(timestamp.hour)
     minutes = format_hour(timestamp.minute)
     return f'{hour}:{minutes}'
+
 
 def get_minutes_stamp() -> int:
     """Return the number of minutes elapsed since midnight"""

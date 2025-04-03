@@ -48,7 +48,7 @@ def get_timestamp():
     minutes = format_hour(timestamp.minute)
     return f'{hour}:{minutes}'
 
-def get_timestamp_with_seconds():
+def get_timestamp_with_seconds() -> str:
     timestamp = datetime.now()
     hour = format_hour(timestamp.hour)
     minutes = format_hour(timestamp.minute)
@@ -60,6 +60,15 @@ def get_minutes_stamp() -> int:
     timestamp = datetime.now()
     return timestamp.hour * 60 + timestamp.minute
 
+def get_datestamp() -> str:
+    """Return the date formatted as month-day-year"""
+    timestamp = datetime.now()
+    month = timestamp.month
+    day = timestamp.day
+    year = timestamp.year % 100
+    return f'{month}-{day}-{year}'
+
+
 if __name__ == '__main__':
     print(get_current_time())
     print(get_current_time_in_timezone("America/New_York"))
@@ -68,3 +77,4 @@ if __name__ == '__main__':
     print(get_timestamp())
     print(get_minutes_stamp())
     print(get_timestamp_with_seconds())
+    print(get_datestamp())

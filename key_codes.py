@@ -1,0 +1,13 @@
+key_0 = 96
+key_1 = 97
+key_2 = 98
+key_3 = 99
+key_4 = 100
+key_5 = 101
+key_6 = 102
+key_7 = 103
+key_8 = 104
+key_9 = 105
+key_asterisk = 106
+key_plus = 107
+email_key = 180

@@ -4,5 +4,8 @@ pyautogui.FAILSAFE = False  # The failsafe only concerns mouse activity, so set 
 def prev_song():
     pyautogui.press('prevtrack')
 
+def next_song():
+    pyautogui.press('nexttrack')
+
 if __name__ == '__main__':
-    prev_song()
+    next_song()

@@ -1,5 +1,5 @@
 from datetime import datetime
-
+import clipboard
 def get_datestamp():
     datestamp = datetime.now().strftime('%Y%m%d')
     return datestamp
@@ -20,3 +20,8 @@ def get_episode_title(title):
     title += f'{get_military_timestamp()}\n\n'
     title += f'{get_am_pm_timestamp()}'
     return title
+
+def print_to_screen(self, message):
+    print(message)
+    clipboard.copy_to_clipboard(f'{message}\n\n')
+    clipboard.paste_from_clipboard()

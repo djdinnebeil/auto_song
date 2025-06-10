@@ -1,5 +1,6 @@
 from datetime import datetime
 import clipboard
+
 def get_datestamp():
     datestamp = datetime.now().strftime('%Y%m%d')
     return datestamp
@@ -25,3 +26,6 @@ def print_to_screen(self, message):
     print(message)
     clipboard.copy_to_clipboard(f'{message}\n\n')
     clipboard.paste_from_clipboard()
+
+def format_song(self, song=None, artist=None, album=None):
+    return f'[{song}] [{artist}] [{album}]'

@@ -2,6 +2,7 @@ from datetime import datetime
 import clipboard
 import pygetwindow as gw
 import keyboard
+import config
 
 def get_datestamp():
     datestamp = datetime.now().strftime('%Y%m%d')
@@ -34,5 +35,5 @@ def format_song(song=None, artist=None, album=None):
 
 def save_word_document():
     active_window_title = gw.getActiveWindow().title
-    if active_window_title[:len('Document')] == 'Document':
+    if active_window_title[:len(config.journal_series)] == config.journal_series or active_window_title[:len('Document')] == 'Document':
         keyboard.save_document()

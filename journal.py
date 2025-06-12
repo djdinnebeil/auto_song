@@ -1,6 +1,7 @@
 from datetime import datetime
 import clipboard
 import pygetwindow as gw
+import keyboard
 
 def get_datestamp():
     datestamp = datetime.now().strftime('%Y%m%d')
@@ -31,7 +32,7 @@ def print_to_screen(self, message):
 def format_song(self, song=None, artist=None, album=None):
     return f'[{song}] [{artist}] [{album}]'
 
-# def save_word_document(self):
-#     active_window_title = gw.getActiveWindow().title
-#     if active_window_title[:len('Document')] == 'Document':
-#         keyboard.save_document()
+def save_word_document(self):
+    active_window_title = gw.getActiveWindow().title
+    if active_window_title[:len('Document')] == 'Document':
+        keyboard.save_document()

@@ -1,6 +1,11 @@
 import pyautogui
 pyautogui.FAILSAFE = False  # The failsafe only concerns mouse activity, so set to False
 
+def save_document():
+    pyautogui.keyDown('ctrlleft')
+    pyautogui.press('s')
+    pyautogui.keyUp('ctrlleft')
+
 def play_pause_song():
     pyautogui.press('playpause')
 

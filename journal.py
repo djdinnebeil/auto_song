@@ -24,15 +24,15 @@ def get_episode_title(title):
     title += f'{get_am_pm_timestamp()}'
     return title
 
-def print_to_screen(self, message):
+def print_to_screen(message):
     print(message)
     clipboard.copy_to_clipboard(f'{message}\n\n')
     clipboard.paste_from_clipboard()
 
-def format_song(self, song=None, artist=None, album=None):
+def format_song(song=None, artist=None, album=None):
     return f'[{song}] [{artist}] [{album}]'
 
-def save_word_document(self):
+def save_word_document():
     active_window_title = gw.getActiveWindow().title
     if active_window_title[:len('Document')] == 'Document':
         keyboard.save_document()

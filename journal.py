@@ -30,6 +30,10 @@ def print_to_screen(message):
     clipboard.copy_to_clipboard(f'{message}\n\n')
     clipboard.paste_from_clipboard()
 
+def print_to_screen_and_save(message):
+    print_to_screen(message)
+    save_word_document()
+
 def format_song(song=None, artist=None, album=None):
     return f'[{song}] [{artist}] [{album}]'
 
